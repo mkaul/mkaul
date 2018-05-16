@@ -3,7 +3,7 @@
 A cheatsheet containing ES2015 [ES6] tips, tricks, best practices and code
 snippet examples for your day to day workflow. Contributions are welcome!
 
-Originally from [David Leonard](https://github.com/DrkSephy/es6-cheatsheet/blob/master/README.md) 
+Original see [David Leonard](https://github.com/DrkSephy/es6-cheatsheet/blob/master/README.md) 
 
 ## Table of Contents
 
