@@ -87,6 +87,22 @@ class SkinnedMesh extends THREE.Mesh {
     return new THREE.Matrix4();
   }
 }
+
+var x = new SkinnedMesh(g,m); // make Object
+
+var y = x.boneCount; // getter 
+
+x.matrixType = z;    // setter
+
+// class expression
+var Rectangle = class extends Polygon {  
+  constructor(height, width) {
+    super();
+    this.height = height;
+    this.width = width;
+  }
+};
+
 ```
 
 More info: [MDN Classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
@@ -116,26 +132,84 @@ More info: [MDN Grammar and types: Object literals](https://developer.mozilla.or
 Template strings provide syntactic sugar for constructing strings.  This is similar to string interpolation features in Perl, Python and more.  Optionally, a tag can be added to allow the string construction to be customized, avoiding injection attacks or constructing higher level data structures from string contents.
 
 ```JavaScript
-// Basic literal string creation
+// Basic literal string creation with ES6 Backtick strings
 `In JavaScript '\n' is a line-feed.`
 
-// Multiline strings
+// Multiline ES6 Backtick strings
 `In JavaScript this is
  not legal.`
 
-// String interpolation
+// ES6 Backtick string interpolation
 var name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
-// Construct an HTTP request prefix is used to interpret the replacements and construction
+```
+
+More info: [MDN Template Strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)
+
+#### Tagged Templates
+A Tag before Template String allows for a function to be called with the string and variables as parameters.
+
+```JavaScript
+
+// Construct an HTTP request 
+// prefix is used to interpret the replacements 
+// and to construct the request
+ 
+// Tagged ES6 Backtick String Literals
 POST`http://foo.org/bar?a=${a}&b=${b}
      Content-Type: application/json
      X-Credentials: ${credentials}
      { "foo": ${foo},
        "bar": ${bar}}`(myOnReadyStateChangeHandler);
+
+ 
+var person = 'Mike';
+var age = 28;
+ 
+function myTag(strings, personExp, ageExp) {
+
+  var str0 = strings[0]; // "that "
+  var str1 = strings[1]; // " is a "
+
+  // There is technically a string after
+  // the final expression (in our example),
+  // but it is empty (""), so disregard.
+  // var str2 = strings[2];
+
+  var ageStr;
+  if (ageExp > 99){
+    ageStr = 'centenarian';
+  } else {
+    ageStr = 'youngster';
+  }
+
+  return str0 + personExp + str1 + ageStr;
+
+}
+
+var output = myTag`that ${ person } is a ${ age }`;
+
+console.log(output);
+// that Mike is a youngster
 ```
 
-More info: [MDN Template Strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)
+
+Also see [lit-html](https://github.com/Polymer/lit-html)
+```javascript
+import {html, render} from 'lit-html';
+
+// This is a lit-html template function. It returns a lit-html template.
+const helloTemplate = (name) => html`<div>Hello ${name}!</div>`;
+
+// Call the function with some data, and pass the result to render()
+
+// This renders <div>Hello Steve!</div> to the document body
+render(helloTemplate('Steve'), document.body);
+
+// This updates to <div>Hello Kevin!</div>, but only updates the ${name} part
+render(helloTemplate('Kevin'), document.body);
+```
 
 ### Destructuring
 Destructuring allows binding using pattern matching, with support for matching arrays and objects.  Destructuring is fail-soft, similar to standard object lookup `foo["bar"]`, producing `undefined` values when not found.
