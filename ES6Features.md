@@ -660,27 +660,3 @@ var p = timeout(1000).then(() => {
 ```
 
 More info: [MDN Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-
-### Reflect API
-Full reflection API exposing the runtime-level meta-operations on objects.  This is effectively the inverse of the Proxy API, and allows making calls corresponding to the same meta-operations as the proxy traps.  Especially useful for implementing proxies.
-
-```JavaScript
-// No sample yet
-```
-
-More info: [MDN Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
-
-### Tail Calls
-Calls in tail-position are guaranteed to not grow the stack unboundedly.  Makes recursive algorithms safe in the face of unbounded inputs.
-
-```JavaScript
-function factorial(n, acc = 1) {
-    'use strict';
-    if (n <= 1) return acc;
-    return factorial(n - 1, n * acc);
-}
-
-// Stack overflow in most implementations today,
-// but safe on arbitrary inputs in ES6
-factorial(100000)
-```
