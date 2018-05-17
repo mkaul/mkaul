@@ -25,8 +25,6 @@ ES6 includes the following new features:
 - [promises](#promises)
 - [math + number + string + array + object APIs](#math--number--string--array--object-apis)
 - [binary and octal literals](#binary-and-octal-literals)
-- [reflect api](#reflect-api)
-- [tail calls](#tail-calls)
 
 ## ECMAScript 6 Features
 
