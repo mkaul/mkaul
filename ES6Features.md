@@ -184,11 +184,6 @@ More info: [MDN Template Strings](https://developer.mozilla.org/en-US/docs/Web/J
 A Tag before Template String allows for a function to be called with the string and variables as parameters.
 
 ```JavaScript
-
-// Construct an HTTP request 
-// prefix is used to interpret the replacements 
-// and to construct the request
- 
 // Tagged ES6 Backtick String Literals
 
 console.log( myTag`that ${ 'Mike' } is a ${ 28 }.` ); // => that Mike is a youngster.
@@ -200,6 +195,9 @@ function myTag(strings, person, age) {
     strings.slice(-1);
 }
 
+// Construct an HTTP POST request from a Tagged String Literal
+// prefix is used to interpret the replacements 
+// and to construct the request
 
 POST`http://foo.org/bar?a=${a}&b=${b}
      Content-Type: application/json
