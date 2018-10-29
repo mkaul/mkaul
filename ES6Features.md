@@ -1,30 +1,30 @@
 # ECMAScript 6 <sup>[git.io/es6features](http://git.io/es6features)</sup>
-see [Luke Hoban](https://github.com/lukehoban/es6features#readme)
+adaptedfrom [Luke Hoban](https://github.com/lukehoban/es6features#readme) and edited 2018 by M.Kaul
 ## Introduction
 ECMAScript 6, also known as ECMAScript 2015, is the latest version of the ECMAScript standard.  ES6 is a significant update to the language, and the first update to the language since ES5 was standardized in 2009. Implementation of these features in major JavaScript engines is [underway now](http://kangax.github.io/es5-compat-table/es6/).
 
 See the [ES6 standard](http://www.ecma-international.org/ecma-262/6.0/) for full specification of the ECMAScript 6 language.
 
 ES6 includes the following new features:
-- [arrows](#arrows)
-- [classes](#classes)
-- [enhanced object literals](#enhanced-object-literals)
-- [template strings](#template-strings)
-- [destructuring](#destructuring)
-- [default + rest + spread](#default--rest--spread)
-- [let + const](#let--const)
-- [iterators + for..of](#iterators--forof)
-- [generators](#generators)
-- [unicode](#unicode)
-- [modules](#modules)
-- [module loaders](#module-loaders)
-- [map + set + weakmap + weakset](#map--set--weakmap--weakset)
-- [proxies](#proxies)
-- [symbols](#symbols)
-- [subclassable built-ins](#subclassable-built-ins)
-- [promises](#promises)
-- [math + number + string + array + object APIs](#math--number--string--array--object-apis)
-- [binary and octal literals](#binary-and-octal-literals)
+1. [arrows](#arrows)
+1. [classes](#classes)
+1. [enhanced object literals](#enhanced-object-literals)
+1. [template strings](#template-strings)
+1. [destructuring](#destructuring)
+1. [default + rest + spread](#default--rest--spread)
+1. [let + const](#let--const)
+1. [iterators + for..of](#iterators--forof)
+1. [generators](#generators)
+1. [unicode](#unicode)
+1. [modules](#modules)
+1. [module loaders](#module-loaders)
+1. [map + set + weakmap + weakset](#map--set--weakmap--weakset)
+1. [proxies](#proxies)
+1. [symbols](#symbols)
+1. [subclassable built-ins](#subclassable-built-ins)
+1. [promises](#promises)
+1. [math + number + string + array + object APIs](#math--number--string--array--object-apis)
+1. [binary and octal literals](#binary-and-octal-literals)
 
 ## ECMAScript 6 Features
 
@@ -33,20 +33,20 @@ Arrows are a function shorthand using the `=>` syntax.  They are syntactically s
 
 ```JavaScript
 // Expression bodies
-var evens = [2,4,6,8];
-var odds = evens.map(v => v + 1);
-var nums = evens.map((v, i) => v + i);
-var pairs = evens.map(v => ({even: v, odd: v + 1}));
+const evens = [2,4,6,8];
+const odds = evens.map(v => v + 1);
+const nums = evens.map((v, i) => v + i);
+const pairs = evens.map(v => ({even: v, odd: v + 1}));
 
 // Statement bodies
-var fives = []; 
+const fives = []; 
 nums.forEach(v => {
   if (v % 5 === 0)
     fives.push(v);
 });
 
 // Lexical this
-var bob = {
+const bob = {
   _name: "Bob",
   _friends: [],
   printFriends() {
@@ -86,14 +86,14 @@ class SkinnedMesh extends THREE.Mesh {
   }
 }
 
-var x = new SkinnedMesh(g,m); // make Object
+const x = new SkinnedMesh(g,m); // make Object
 
-var y = x.boneCount; // getter 
+const y = x.boneCount; // getter 
 
 x.matrixType = z;    // setter
 
 // class expression
-var Rectangle = class extends Polygon {  
+const Rectangle = class extends Polygon {  
   constructor(height, width) {
     super();
     this.height = height;
@@ -109,7 +109,7 @@ More info: [MDN Classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Re
 Object literals are extended to support setting the prototype at construction, shorthand for `foo: foo` assignments, defining methods, making super calls, and computing property names with expressions.  Together, these also bring object literals and class declarations closer together, and let object-based design benefit from some of the same conveniences.
 
 ```JavaScript
-var obj = {
+const obj = {
     // __proto__
     __proto__: theProtoObj,
     // Shorthand for ‘handler: handler’
@@ -138,7 +138,7 @@ Template strings provide syntactic sugar for constructing strings.  This is simi
  not legal.`
 
 // ES6 Backtick string interpolation
-var name = "Bob", time = "today";
+const name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
 ```
@@ -162,20 +162,20 @@ POST`http://foo.org/bar?a=${a}&b=${b}
        "bar": ${bar}}`(myOnReadyStateChangeHandler);
 
  
-var person = 'Mike';
-var age = 28;
+const person = 'Mike';
+const age = 28;
  
 function myTag(strings, personExp, ageExp) {
 
-  var str0 = strings[0]; // "that "
-  var str1 = strings[1]; // " is a "
+  const str0 = strings[0]; // "that "
+  const str1 = strings[1]; // " is a "
 
   // There is technically a string after
   // the final expression (in our example),
   // but it is empty (""), so disregard.
-  // var str2 = strings[2];
+  // const str2 = strings[2];
 
-  var ageStr;
+  const ageStr;
   if (ageExp > 99){
     ageStr = 'centenarian';
   } else {
@@ -186,7 +186,7 @@ function myTag(strings, personExp, ageExp) {
 
 }
 
-var output = myTag`that ${ person } is a ${ age }`;
+const output = myTag`that ${ person } is a ${ age }`;
 
 console.log(output);
 // that Mike is a youngster
@@ -214,15 +214,15 @@ Destructuring allows binding using pattern matching, with support for matching a
 
 ```JavaScript
 // list matching
-var [a, , b] = [1,2,3];
+const [a, , b] = [1,2,3];
 
 // object matching
-var { op: a, lhs: { op: b }, rhs: c }
+const { op: a, lhs: { op: b }, rhs: c }
        = getASTNode()
 
 // object matching shorthand
 // binds `op`, `lhs` and `rhs` in scope
-var {op, lhs, rhs} = getASTNode()
+const {op, lhs, rhs} = getASTNode()
 
 // Can be used in parameter position
 function g({name: x}) {
@@ -231,11 +231,11 @@ function g({name: x}) {
 g({name: 5})
 
 // Fail-soft destructuring
-var [a] = [];
+const [a] = [];
 a === undefined;
 
 // Fail-soft destructuring with defaults
-var [a = 1] = [];
+const [a = 1] = [];
 a === 1;
 ```
 
@@ -245,14 +245,14 @@ More info: [MDN Destructuring assignment](https://developer.mozilla.org/en-US/do
 Callee-evaluated default parameter values.  Turn an array into consecutive arguments in a function call.  Bind trailing parameters to an array.  Rest replaces the need for `arguments` and addresses common cases more directly.
 
 ```JavaScript
-function f(x, y=12) {
+function f(x, y=12) {  // Default parameters
   // y is 12 if not passed (or passed as undefined)
   return x + y;
 }
 f(3) == 15
 ```
 ```JavaScript
-function f(x, ...y) {
+function f(x, ...y) { // Rest parameters
   // y is an Array
   return x * y.length;
 }
@@ -263,7 +263,7 @@ function f(x, y, z) {
   return x + y + z;
 }
 // Pass each elem of array as argument
-f(...[1,2,3]) == 6
+f(...[1,2,3]) == 6  // Spread operator
 ```
 
 More MDN info: [Default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters), [Rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), [Spread Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
@@ -271,6 +271,41 @@ More MDN info: [Default parameters](https://developer.mozilla.org/en-US/docs/Web
 ### Let + Const
 Block-scoped binding constructs.  `let` is the new `var`.  `const` is single-assignment.  Static restrictions prevent use before assignment.
 
+Tipp: Use `const` as much as possible!
+
+```JavaScript
+// iterate over values of an Array
+console.log( 'x of [1,2,3]' );
+for (const x of [1,2,3]){
+  console.log( x ); // -> 1,2,3
+}
+
+// iterate over values of an Object
+console.log( 'x of { a:1, b:2 }' );
+for (const x of Object.values({ a:1, b:2 })){
+  console.log( x ); // -> 1,2
+}
+
+// iterate over keys of an Array
+console.log( 'x in ["a","b","c"]' );
+for (const x in ["a","b","c"]){
+  console.log( x ); // -> 0,1,2
+}
+
+// iterate over keys of an Object
+console.log( 'x in { a:1, b:2 }' );
+for (const x in Object.keys({ a:1, b:2 })){
+  console.log( x ); // -> a,b
+}
+
+// iterate over a range of numbers
+console.log( 'i=0; i<3; i++' );
+for (let i=0; i<3; i++){
+  console.log( i ); // 0,1,2
+}
+```
+
+`let` and `const` result in "_better_" (_more helpful_) error messages than `var`:
 
 ```JavaScript
 function f() {
@@ -306,7 +341,7 @@ let fibonacci = {
   }
 }
 
-for (var n of fibonacci) {
+for (const n of fibonacci) {
   // truncate the sequence at 1000
   if (n > 1000)
     break;
@@ -336,11 +371,11 @@ Generators simplify iterator-authoring using `function*` and `yield`.  A functio
 Note: Can also be used to enable ‘await’-like async programming, see also ES7 `await` proposal.
 
 ```JavaScript
-var fibonacci = {
+const fibonacci = {
   [Symbol.iterator]: function*() {
-    var pre = 0, cur = 1;
+    let pre = 0, cur = 1;
     for (;;) {
-      var temp = pre;
+      const temp = pre;
       pre = cur;
       cur += temp;
       yield cur;
@@ -348,7 +383,7 @@ var fibonacci = {
   }
 }
 
-for (var n of fibonacci) {
+for (const n of fibonacci) {
   // truncate the sequence at 1000
   if (n > 1000)
     break;
@@ -384,7 +419,7 @@ Non-breaking additions to support full Unicode, including new Unicode literal fo
 "𠮷".codePointAt(0) == 0x20BB7
 
 // for-of iterates code points
-for(var c of "𠮷") {
+for(const c of "𠮷") {
   console.log(c);
 }
 ```
@@ -399,7 +434,7 @@ Language-level support for modules for component definition.  Codifies patterns 
 export function sum(x, y) {
   return x + y;
 }
-export var pi = 3.141593;
+export const pi = 3.141593;
 ```
 ```JavaScript
 // app.js
@@ -417,7 +452,7 @@ Some additional features include `export default` and `export *`:
 ```JavaScript
 // lib/mathplusplus.js
 export * from "lib/math";
-export var e = 2.71828182846;
+export const e = 2.71828182846;
 export default function(x) {
     return Math.log(x);
 }
@@ -432,11 +467,11 @@ More MDN info: [import statement](https://developer.mozilla.org/en-US/docs/Web/J
 
 ### Module Loaders
 Module loaders support:
-- Dynamic loading
-- State isolation
-- Global namespace isolation
-- Compilation hooks
-- Nested virtualization
+1. Dynamic loading
+1. State isolation
+1. Global namespace isolation
+1. Compilation hooks
+1. Nested virtualization
 
 The default module loader can be configured, and new loaders can be constructed to evaluate and load code in isolated or constrained contexts.
 
@@ -447,7 +482,7 @@ System.import('lib/math').then(function(m) {
 });
 
 // Create execution sandboxes – new Loaders
-var loader = new Loader({
+const loader = new Loader({
   global: fixup(window) // replace ‘console.log’
 });
 loader.eval("console.log('hello world!');");
@@ -462,24 +497,24 @@ Efficient data structures for common algorithms.  WeakMaps provides leak-free ob
 
 ```JavaScript
 // Sets
-var s = new Set();
+const s = new Set();
 s.add("hello").add("goodbye").add("hello");
 s.size === 2;
 s.has("hello") === true;
 
 // Maps
-var m = new Map();
+const m = new Map();
 m.set("hello", 42);
 m.set(s, 34);
 m.get(s) == 34;
 
 // Weak Maps
-var wm = new WeakMap();
+const wm = new WeakMap();
 wm.set(s, { extra: 42 });
 wm.size === undefined
 
 // Weak Sets
-var ws = new WeakSet();
+const ws = new WeakSet();
 ws.add({ data: 42 });
 // Because the added object has no other references, it will not be held in the set
 ```
@@ -491,34 +526,34 @@ Proxies enable creation of objects with the full range of behaviors available to
 
 ```JavaScript
 // Proxying a normal object
-var target = {};
-var handler = {
+const target = {};
+const handler = {
   get: function (receiver, name) {
     return `Hello, ${name}!`;
   }
 };
 
-var p = new Proxy(target, handler);
+const p = new Proxy(target, handler);
 p.world === 'Hello, world!';
 ```
 
 ```JavaScript
 // Proxying a function object
-var target = function () { return 'I am the target'; };
-var handler = {
+const target = function () { return 'I am the target'; };
+const handler = {
   apply: function (receiver, ...args) {
     return 'I am the proxy';
   }
 };
 
-var p = new Proxy(target, handler);
+const p = new Proxy(target, handler);
 p() === 'I am the proxy';
 ```
 
 There are traps available for all of the runtime-level meta-operations:
 
 ```JavaScript
-var handler =
+const handler =
 {
   get:...,
   set:...,
@@ -544,10 +579,10 @@ Symbols enable access control for object state.  Symbols allow properties to be 
 
 
 ```JavaScript
-var MyClass = (function() {
+const MyClass = (function() {
 
   // module scoped symbol
-  var key = Symbol("key");
+  const key = Symbol("key");
 
   function MyClass(privateData) {
     this[key] = privateData;
@@ -562,7 +597,7 @@ var MyClass = (function() {
   return MyClass;
 })();
 
-var c = new MyClass("hello")
+const c = new MyClass("hello")
 c["key"] === undefined
 ```
 
@@ -572,8 +607,8 @@ More info: [MDN Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/
 In ES6, built-ins like `Array`, `Date` and DOM `Element`s can be subclassed.
 
 Object construction for a function named `Ctor` now uses two-phases (both virtually dispatched):
-- Call `Ctor[@@create]` to allocate the object, installing any special behavior
-- Invoke constructor on new instance to initialize
+1. Call `Ctor[@@create]` to allocate the object, installing any special behavior
+1. Invoke constructor on new instance to initialize
 
 The known `@@create` symbol is available via `Symbol.create`.  Built-ins now expose their `@@create` explicitly.
 
@@ -595,7 +630,7 @@ class MyArray extends Array {
 // Two-phase 'new':
 // 1) Call @@create to allocate object
 // 2) Invoke constructor on new instance
-var arr = new MyArray();
+const arr = new MyArray();
 arr[1] = 12;
 arr.length == 2
 ```
@@ -648,7 +683,7 @@ function timeout(duration = 0) {
     })
 }
 
-var p = timeout(1000).then(() => {
+const p = timeout(1000).then(() => {
     return timeout(2000);
 }).then(() => {
     throw new Error("hmm");
