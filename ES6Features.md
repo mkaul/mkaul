@@ -190,15 +190,15 @@ A Tag before Template String allows for a function to be called with the string 
 // and to construct the request
  
 // Tagged ES6 Backtick String Literals
-function myTag(strings, person, age) {
-
-  console.log( strings ); // => [ 'that ', ' is a ', '.' ]
-
-  return strings.slice(0,-1).join( person ) + ( age > 99 ? 'centenarian' : 'youngster' ) + strings.slice(-1);
-
-}
 
 console.log( myTag`that ${ 'Mike' } is a ${ 28 }.` ); // => that Mike is a youngster.
+
+function myTag(strings, person, age) {
+  console.log( strings ); // => [ 'that ', ' is a ', '.' ]
+  return strings.slice(0,-1).join( person ) + 
+    ( age > 99 ? 'centenarian' : 'youngster' ) + 
+    strings.slice(-1);
+}
 
 
 POST`http://foo.org/bar?a=${a}&b=${b}
