@@ -222,7 +222,8 @@ function POST(strings, a, b, credentials, foo, bar){
 
 Also see [lit-html](https://github.com/Polymer/lit-html)
 ```javascript
-import {html, render} from 'lit-html';
+// inside <script type="module">
+import {html, render} from 'https://unpkg.com/lit-html?module';
 
 // This is a lit-html template function. It returns a lit-html template.
 const helloTemplate = (name) => html`<div>Hello ${name}!</div>`;
