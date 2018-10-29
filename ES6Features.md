@@ -102,6 +102,39 @@ const Rectangle = class extends Polygon {
 };
 
 ```
+Class Expressions can be used in functions: as parameter or as return value
+```JavaScript
+class BaseClass {
+  constructor(a,b){
+    this.x = a;
+    this.y = b;
+  }
+}
+
+const addMethod = function( AnyBaseClass ){
+  return class extends AnyBaseClass {
+    method() { return this.x + this.y }
+  }
+};
+
+const ClassWithMethod = addMethod( BaseClass );
+const instance = new ClassWithMethod(1,2);
+
+console.log( instance.method() );
+```
+Mixins are functions merging methods into class expressions:
+```JavaScript
+const calculatorMixin = Base => class extends Base {
+  calc() { }
+};
+
+const randomizerMixin = Base => class extends Base {
+  randomize() { }
+};
+class Foo { }
+class Bar extends calculatorMixin(randomizerMixin(Foo)) { }
+```
+Usage of Mixins can be found in all major frameworks, e.g. Polymer, Angular, ...
 
 More info: [MDN Classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
 
@@ -131,16 +164,18 @@ Template strings provide syntactic sugar for constructing strings.  This is simi
 
 ```JavaScript
 // Basic literal string creation with ES6 Backtick strings
-`In JavaScript '\n' is a line-feed.`
+const s = `In JavaScript '\n' is a line-feed.`
 
 // Multiline ES6 Backtick strings
-`In JavaScript this is
+const t =  `In JavaScript this is
  not legal.`
 
 // ES6 Backtick string interpolation
 const name = "Bob", time = "today";
-`Hello ${name}, how are you ${time}?`
+console.log( `Hello ${name}, how are you ${time}?` );
 
+// even with expressions to be evaluated
+console.log( `The time is ${new Date().toLocaleTimeString()}.` );
 ```
 
 More info: [MDN Template Strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)
@@ -155,41 +190,35 @@ A Tag before Template String allows for a function to be called with the string 
 // and to construct the request
  
 // Tagged ES6 Backtick String Literals
+function myTag(strings, person, age) {
+
+  console.log( strings ); // => [ 'that ', ' is a ', '.' ]
+
+  return strings.slice(0,-1).join( person ) + ( age > 99 ? 'centenarian' : 'youngster' ) + strings.slice(-1);
+
+}
+
+console.log( myTag`that ${ 'Mike' } is a ${ 28 }.` ); // => that Mike is a youngster.
+
+
 POST`http://foo.org/bar?a=${a}&b=${b}
      Content-Type: application/json
      X-Credentials: ${credentials}
      { "foo": ${foo},
        "bar": ${bar}}`(myOnReadyStateChangeHandler);
 
- 
-const person = 'Mike';
-const age = 28;
- 
-function myTag(strings, personExp, ageExp) {
-
-  const str0 = strings[0]; // "that "
-  const str1 = strings[1]; // " is a "
-
-  // There is technically a string after
-  // the final expression (in our example),
-  // but it is empty (""), so disregard.
-  // const str2 = strings[2];
-
-  const ageStr;
-  if (ageExp > 99){
-    ageStr = 'centenarian';
-  } else {
-    ageStr = 'youngster';
+function POST(strings, a, b, credentials, foo, bar){
+  return function(myOnReadyStateChangeHandler){
+    fetch(new Request( strings[0] + a + strings[1] + b ), {
+      method: 'POST',
+      body: { foo: foo, bar: bar},
+      headers:{
+        'Content-Type': 'application/json',
+        'X-Credentials': credentials
+      }
+    });
   }
-
-  return str0 + personExp + str1 + ageStr;
-
 }
-
-const output = myTag`that ${ person } is a ${ age }`;
-
-console.log(output);
-// that Mike is a youngster
 ```
 
 
